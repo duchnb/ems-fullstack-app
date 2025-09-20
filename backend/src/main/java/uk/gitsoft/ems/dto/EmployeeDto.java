@@ -1,12 +1,8 @@
 package uk.gitsoft.ems.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Service;
+import lombok.*;
 
-@Getter
-@Service
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDto {

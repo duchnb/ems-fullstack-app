@@ -9,6 +9,8 @@ import uk.gitsoft.ems.mapper.EmployeeMapper;
 import uk.gitsoft.ems.repository.EmployeeRepository;
 import uk.gitsoft.ems.service.EmployeeService;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
@@ -31,6 +33,62 @@ public class EmployeeServiceImpl implements EmployeeService {
                         new ResourceNotFoundException("Employee not found: " + employeeId));
 
         return EmployeeMapper.mapToEmployeeDto(employee);
+    }
+
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return employees.stream()
+                .map(EmployeeMapper::mapToEmployeeDto)
+                .toList();
+    }
+
+    @Override
+    public EmployeeDto updateEmployee(long employeeId, EmployeeDto employeeDto) {
+        // Optional: validate id match if body.id present
+        if (employeeDto.getId() != null && !employeeDto.getId().equals(employeeId)) {
+            throw new IllegalArgumentException("ID in path and body must match");
+        }
+        if (employeeId <= 0) {
+            throw new IllegalArgumentException("Employee path ID must be provided and greater than zero");
+        }
+        employeeRepository.findById(employeeId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Employee not found: " + employeeDto.getId()));
+        Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
+        employee.setId(employeeId);
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
+    }
+
+
+    @Override
+    public void deleteEmployeeById(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found: " + employeeId));
+        employeeRepository.delete(employee);
+    }
+
+    @Override
+    public EmployeeDto patchEmployee(Long employeeId, EmployeeDto employeeDto) {
+        if (employeeId == null || employeeId <= 0) {
+            throw new IllegalArgumentException("Employee ID must be provided and greater than zero");
+        }
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Employee not found: " + employeeId));
+
+        if (employeeDto.getFirstName() != null) {
+            employee.setFirstname(employeeDto.getFirstName());
+        }
+        if (employeeDto.getLastName() != null) {
+            employee.setLastname(employeeDto.getLastName());
+        }
+        if (employeeDto.getEmail() != null) {
+            employee.setEmail(employeeDto.getEmail());
+        }
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
     }
 
 }

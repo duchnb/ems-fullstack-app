@@ -1,17 +1,14 @@
 package uk.gitsoft.ems.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.stereotype.Service;
+import lombok.*;
 
 @Getter
-@Service
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)   // equals/hashCode on id only
 @Entity
 @Table(name = "employees")
 public class Employee {
