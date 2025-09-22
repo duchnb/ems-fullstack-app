@@ -25,7 +25,7 @@ function App() {
                     {/*http://localhost:5173/edit-employee/1*/}
                     <Route path="/update-employee/:id" element={<EmployeeComponents/>}/>
                     {/*http://localhost:5173/departments*/}
-                    <Route path="/department/:id" element={<ListDepartmentComponents/>}/>
+                    <Route path="/departments" element={<ListDepartmentComponents/>}/>
 
                 </Route>
             </Routes>
