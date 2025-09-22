@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
 import {createEmployee, getEmployee, updateEmployee} from '../services/EmployeeService'
+import {listDepartments} from '../services/DepartmentServices'
 import {useNavigate, useParams} from 'react-router-dom'
 
 function EmployeeComponents() {
@@ -8,6 +9,23 @@ function EmployeeComponents() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+
+    const [departmentId, setDepartmentId] = useState('');
+    const [departments, setDepartments] = useState([]);
+
+    useEffect(() => {
+        if(departments.length === 0){
+            listDepartments()
+                .then(res => {
+                    setDepartments(res.data);
+                })
+                .catch(err => console.error(err));
+        }
+        return () => {
+
+        }
+    }, []);
+
 
     const navigate = useNavigate();
 
@@ -21,6 +39,7 @@ function EmployeeComponents() {
                     setFirstName(emp.firstName || '');
                     setLastName(emp.lastName || '');
                     setEmail(emp.email || '');
+                    setDepartmentId(emp.departmentId || '')
                 })
                 .catch(err => console.error(err));
         }
@@ -29,8 +48,16 @@ function EmployeeComponents() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const employee = {firstName, lastName, email};
-        if(id){
+
+        // Ensure a department is selected
+        if (!departmentId) {
+            alert('Please select a department.');
+            return;
+        }
+
+        const employee = { firstName, lastName, email, departmentId: Number(departmentId) };
+
+        if (id) {
             updateEmployee(id, employee)
                 .then(() => navigate('/employees'))
                 .catch(err => console.error(err));
@@ -47,6 +74,8 @@ function EmployeeComponents() {
         }else
             return <h2 className='text-center'>Add Employee</h2>
     }
+
+    console.log(departments);
     return (
         <div className="container">
             <div className='row'>
@@ -73,6 +102,20 @@ function EmployeeComponents() {
                                 <input type='email' className='form-control' id='email' value={email}
                                        placeholder='Enter email'
                                        onChange={(e) => setEmail(e.target.value)} required/>
+                            </div>
+                            <div className='form-group mb-3'>
+                                <label htmlFor='department' className='form-label'>Department:</label>
+                                <select className='form-control' id='department' value={departmentId}
+                                       required
+                                       onChange={(e) => setDepartmentId(e.target.value)} >
+                                    <option value=''>Select Department</option>
+                                    {
+                                        departments.map(dept => (
+                                            <option key={dept.id} value={dept.id}>{dept.departmentName}</option>
+                                        ))
+                                    }
+
+                                </select>
                             </div>
                             <button type='submit' className='btn btn-success'>{id ? 'Update Employee' : 'Add Employee'}</button>
 
