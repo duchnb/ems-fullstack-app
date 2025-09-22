@@ -75,7 +75,6 @@ function EmployeeComponents() {
             return <h2 className='text-center'>Add Employee</h2>
     }
 
-    console.log(departments);
     return (
         <div className="container">
             <div className='row'>
