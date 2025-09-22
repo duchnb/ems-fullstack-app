@@ -1,18 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import {listDepartments} from '../services/DepartmentServices.js'
-
-function addNewDepartment() {
-    
-}
-
-function updateDepartment(id) {
-    
-}
-
-function removeDepartment(id) {
-    
-}
+import {listDepartments, deleteDepartment, updateDepartment} from '../services/DepartmentServices.js'
+import {useNavigate} from 'react-router-dom'
 
 const ListDepartmentComponents = () => {
 
@@ -24,6 +13,28 @@ const ListDepartmentComponents = () => {
         , []);
 
     const [departments, setDepartments] = useState([]);
+    const navigate = useNavigate();
+
+
+    function addNewDepartment() {
+        navigate('/add-department');
+    }
+
+    function updateDepartment(id) {
+        navigate(`/update-department/${id}`);
+    }
+
+    function removeDepartment(id) {
+        if(window.confirm('Are you sure you want to delete this department?')){
+            deleteDepartment(id)
+                .then(() => {
+                    setDepartments(prev => (Array.isArray(prev) ? prev.filter(emp => emp.id !== id) : []));
+                })
+                .catch((error) => { console.error(error) })
+        } else {
+            return;
+        }
+    }
 
     return (
         <div className="container">
@@ -61,4 +72,6 @@ const ListDepartmentComponents = () => {
         </div>
     )
 }
+
+
 export default ListDepartmentComponents

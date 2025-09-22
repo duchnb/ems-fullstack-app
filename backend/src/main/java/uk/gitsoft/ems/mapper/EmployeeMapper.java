@@ -5,12 +5,22 @@ import uk.gitsoft.ems.entity.Employee;
 
 public class EmployeeMapper {
     public static EmployeeDto mapToEmployeeDto(Employee employee) {
-        return new EmployeeDto(
-                employee.getId(), employee.getFirstname(),
-                employee.getLastname(), employee.getEmail());
+        EmployeeDto employeeDto = new EmployeeDto();
+        employeeDto.setId(employee.getId());
+        employeeDto.setFirstName(employee.getFirstname());
+        employeeDto.setLastName(employee.getLastname());
+        employeeDto.setEmail(employee.getEmail());
+        if (employee.getDepartment() != null) {
+            employeeDto.setDepartmentId(employee.getDepartment().getId());
+        }
+        return employeeDto;
     }
     public static Employee mapToEmployee(EmployeeDto employeeDto) {
-        return new Employee(employeeDto.getId(), employeeDto.getFirstName(),
-                employeeDto.getLastName(), employeeDto.getEmail());
+        Employee employee = new Employee();
+        employee.setId(employeeDto.getId());
+        employee.setFirstname(employeeDto.getFirstName());
+        employee.setLastname(employeeDto.getLastName());
+        employee.setEmail(employeeDto.getEmail());
+        return employee;
     }
 }

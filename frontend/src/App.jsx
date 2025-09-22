@@ -7,6 +7,7 @@ import FooterComponent from "./components/FooterComponent";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import EmployeeComponents from "./components/EmployeeComponents";
 import ListDepartmentComponents from "./components/ListDepartmentComponents";
+import DepartmentComponents from "./components/DepartmentComponents";
 
 function App() {
 
@@ -26,7 +27,10 @@ function App() {
                     <Route path="/update-employee/:id" element={<EmployeeComponents/>}/>
                     {/*http://localhost:5173/departments*/}
                     <Route path="/departments" element={<ListDepartmentComponents/>}/>
-
+                    {/*http://localhost:5173/add-department*/}
+                    <Route path="/add-department" element={<DepartmentComponents/>}/>
+                    {/*http://localhost:5173/edit-department/1*/}
+                    <Route path="/update-department/:id" element={<DepartmentComponents/>}/>
                 </Route>
             </Routes>
             <FooterComponent/>

@@ -3,9 +3,11 @@ package uk.gitsoft.ems.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uk.gitsoft.ems.dto.EmployeeDto;
+import uk.gitsoft.ems.entity.Department;
 import uk.gitsoft.ems.entity.Employee;
 import uk.gitsoft.ems.exception.ResourceNotFoundException;
 import uk.gitsoft.ems.mapper.EmployeeMapper;
+import uk.gitsoft.ems.repository.DepartmentRepository;
 import uk.gitsoft.ems.repository.EmployeeRepository;
 import uk.gitsoft.ems.service.EmployeeService;
 
@@ -17,11 +19,15 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final DepartmentRepository DepartmentRepository;
 
     @Override
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
 
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
+        Department department = DepartmentRepository.findById(employeeDto.getDepartmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found: " + employeeDto.getDepartmentId()));
+        employee.setDepartment(department);
         Employee savedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
@@ -56,7 +62,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee not found: " + employeeDto.getId()));
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
+
         employee.setId(employeeId);
+
+        Department department = DepartmentRepository.findById(employeeDto.getDepartmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found: " + employeeDto.getDepartmentId()));
+        employee.setDepartment(department);
+
         Employee updatedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(updatedEmployee);
     }
