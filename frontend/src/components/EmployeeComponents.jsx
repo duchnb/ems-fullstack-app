@@ -5,7 +5,6 @@ import {listDepartments} from '../services/DepartmentServices'
 import {useNavigate, useParams} from 'react-router-dom'
 
 function EmployeeComponents() {
-
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -78,7 +77,7 @@ function EmployeeComponents() {
     return (
         <div className="container">
             <div className='row'>
-                <div className='col-md-6 offset-md-3 card mt-5 p-4 shadow bg-light'>
+                <div className='col-md-6 offset-md-3 card mt-5 p-4 shadow'>
                     {
                         pageTitle()
                     }

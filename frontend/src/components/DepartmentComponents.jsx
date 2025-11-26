@@ -50,7 +50,7 @@ function DepartmentComponents() {
     return (
         <div className="container">
             <div className='row'>
-                <div className='col-md-6 offset-md-3 card mt-5 p-4 shadow bg-light'>
+                <div className='col-md-6 offset-md-3 card mt-5 p-4 shadow'>
                     {
                         pageTitle()
                     }
