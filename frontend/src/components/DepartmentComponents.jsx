@@ -57,14 +57,14 @@ function DepartmentComponents() {
                     <div className='card-body'>
                         <form onSubmit={handleSubmit}>
                             <div className='form-group mb-3'>
-                                <label htmlFor='firstName' className='form-label'>Department Name:</label>
-                                <input type='text' className='form-control' id='firstName' value={departmentName}
+                                <label htmlFor='departmentName' className='form-label'>Department Name:</label>
+                                <input type='text' className='form-control' id='departmentName' value={departmentName}
                                        placeholder='Enter department name'
                                        onChange={(e) => setDepartmentName(e.target.value)} required/>
                             </div>
                             <div className='form-group mb-3'>
-                                <label htmlFor='lastName' className='form-label'>Department Description:</label>
-                                <input type='text' className='form-control' id='lastName' value={departmentDescription}
+                                <label htmlFor='departmentDescription' className='form-label'>Department Description:</label>
+                                <input type='text' className='form-control' id='departmentDescription' value={departmentDescription}
                                        placeholder='Enter description'
                                        onChange={(e) => setDepartmentDescription(e.target.value)} required/>
                             </div>

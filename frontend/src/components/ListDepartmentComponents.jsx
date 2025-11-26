@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import {listDepartments, deleteDepartment, updateDepartment} from '../services/DepartmentServices.js'
+import {listDepartments, deleteDepartment} from '../services/DepartmentServices.js'
 import {useNavigate} from 'react-router-dom'
 
 const ListDepartmentComponents = () => {
