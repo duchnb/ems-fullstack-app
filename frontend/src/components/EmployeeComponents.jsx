@@ -5,7 +5,6 @@ import {listDepartments} from '../services/DepartmentServices'
 import {useNavigate, useParams} from 'react-router-dom'
 
 function EmployeeComponents() {
-
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
