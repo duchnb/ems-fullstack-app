@@ -12,6 +12,7 @@ public class EmployeeMapper {
         employeeDto.setEmail(employee.getEmail());
         if (employee.getDepartment() != null) {
             employeeDto.setDepartmentId(employee.getDepartment().getId());
+            employeeDto.setDepartmentName(employee.getDepartment().getDepartmentName());
         }
         return employeeDto;
     }

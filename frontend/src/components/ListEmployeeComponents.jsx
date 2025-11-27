@@ -45,10 +45,11 @@ const ListEmployeeComponents = () => {
                     <thead className="table-dark">
                     <tr>
                         <th>Employee ID</th>
-                        <th>Employee First Name</th>
-                        <th>Employee Last Name</th>
-                        <th>Employee Email</th>
-                        <th className={"text-center"}>Actions</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th className={"text-center"}>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -60,6 +61,7 @@ const ListEmployeeComponents = () => {
                                     <td>{employee.firstName}</td>
                                     <td>{employee.lastName}</td>
                                     <td>{employee.email}</td>
+                                    <td>{employee.departmentName || ''}</td>
                                     <td className="d-flex justify-content-evenly">
                                         <button className="btn btn-info btn-sm" onClick={()=>updateEmployee(employee.id)}>Update</button>
                                         <button className="btn btn-danger btn-sm" onClick={()=>removeEmployee(employee.id)}>Delete</button>

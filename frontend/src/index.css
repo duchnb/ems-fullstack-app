@@ -41,6 +41,7 @@ a:hover, .nav-link:hover{
 }
 .navbar-brand{
   color: white !important;
+  text-align: center !important   ;
 }
 
 /* Containers */
@@ -66,15 +67,20 @@ h1,h2,h3,h4,h5,h6{
   box-shadow: 0 0 0 0.25rem rgba(139,92,246,0.35) !important;
 }
 .btn-info{
-  background-color: #22d3ee !important;
+  /*background-color: #22d3ee !important;*/
+    background-color: var(--border) !important;
   border-color: #06b6d4 !important;
+  color: #06b6d4 !important;
+  margin: 0 0.2rem;
 }
 .btn-info:hover{
   box-shadow: 0 0 0 0.25rem rgba(34,211,238,0.25) !important;
 }
 .btn-danger{
-  background-color: var(--danger) !important;
+  background-color: var(--border) !important;
   border-color: #dc2626 !important;
+  color: #dc2626  !important;
+    margin: 0 0.2rem;
 }
 .btn-danger:hover{
   box-shadow: 0 0 0 0.25rem rgba(239,68,68,0.25) !important;
@@ -165,10 +171,70 @@ th.text-center, td.text-center{
 
 /* Success button adapted for dark theme */
 .btn-success{
-  background-color: var(--success) !important;
+  background-color: var(--border) !important;
   border-color: #16a34a !important;
-  color: #0b0d12 !important;
+  color: #16a34a !important;
 }
 .btn-success:hover{
   box-shadow: 0 0 0 0.25rem rgba(34,197,94,0.25) !important;
+}
+
+/* EMS custom header + tabs */
+.ems-header{
+  padding-top: 1rem;
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ems-title{
+  font-size: clamp(1.5rem, 2.5vw + 1rem, 2.25rem);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Tabs container sits below the centered title, aligned to the left */
+.ems-tabs{
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0 1rem;
+  margin: 0.5rem auto 0; /* center the whole row while content stays left */
+  max-width: 1200px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Individual tab links */
+.ems-tab{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: var(--text-200);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: transparent;
+  opacity: 0.7; /* slight fade when not active */
+  transition: color .2s ease, opacity .2s ease, background-color .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.ems-tab:hover{
+  opacity: 0.9;
+  color: #fff;
+}
+
+/* Active/selected tab */
+.ems-tab.active{
+  opacity: 1;
+  color: #fff;
+  background-color: var(--bg-800);
+  border-color: var(--border);
+  box-shadow: 0 8px 16px rgba(17, 12, 46, 0.35), 0 2px 6px rgba(139, 92, 246, 0.2);
+  margin-bottom: -1px; /* visually sit on top of the bottom border */
 }

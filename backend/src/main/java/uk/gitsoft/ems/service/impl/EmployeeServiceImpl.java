@@ -60,7 +60,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Employee not found: " + employeeDto.getId()));
+                        new ResourceNotFoundException("Employee not found: " + employeeId));
         Employee employee = EmployeeMapper.mapToEmployee(employeeDto);
 
         employee.setId(employeeId);
@@ -99,6 +99,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         if (employeeDto.getEmail() != null) {
             employee.setEmail(employeeDto.getEmail());
+        }
+        if (employeeDto.getDepartmentId() != null) {
+            Department department = DepartmentRepository.findById(employeeDto.getDepartmentId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Department not found: " + employeeDto.getDepartmentId()));
+            employee.setDepartment(department);
         }
         Employee updatedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(updatedEmployee);

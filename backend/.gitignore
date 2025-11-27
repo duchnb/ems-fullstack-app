@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Node (if frontend artifacts were placed here accidentally)
+node_modules/
