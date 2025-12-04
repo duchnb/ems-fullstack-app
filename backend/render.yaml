@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ems-backend
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/ems-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+    envVars:
+      - key: JAVA_VERSION
+        value: 21
