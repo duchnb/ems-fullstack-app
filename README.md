@@ -26,6 +26,7 @@ This project demonstrates a modern full-stack architecture with RESTful APIs, Re
 
 # 🧭 Table of Contents
 
+- [Live Demo](#live-demo)
 - [Overview](#overview)
 - [Features](#features)
 - [Architecture](#architecture)
@@ -35,8 +36,31 @@ This project demonstrates a modern full-stack architecture with RESTful APIs, Re
 - [Database Schema](#database-schema)
 - [Installation & Setup](#installation--setup)
 - [API Endpoints](#api-endpoints)
+- [Deployment](#deployment)
 - [Future Enhancements](#future-enhancements)
 - [Author](#author)
+
+---
+
+<a id="live-demo"></a>
+# 🌐 Live Demo
+
+**🚀 Application is live on AWS!**
+
+**URL:** [https://ems.gitsoft.uk](https://ems.gitsoft.uk)
+
+**Infrastructure:**
+- **Hosting:** AWS EC2 (t3.micro)
+- **Database:** MariaDB 10.5
+- **Web Server:** Nginx with SSL/TLS
+- **Domain:** Route 53 DNS
+- **SSL Certificate:** Let's Encrypt (auto-renewal)
+
+**Architecture:**
+- React frontend served by Nginx (static files)
+- Spring Boot REST API (port 8081, localhost only)
+- Reverse proxy configuration for API requests
+- Secure HTTPS with automatic HTTP redirect
 
 ---
 
@@ -128,6 +152,14 @@ This application uses a modern **full-stack architecture** with clear separation
 - Bootstrap 5.3.8
 - Vite 7.1.2
 - JavaScript (ES6+)
+
+### **Deployment & Infrastructure**
+- AWS EC2 (t3.micro)
+- AWS Route 53 (DNS)
+- MariaDB 10.5
+- Nginx (Reverse Proxy & SSL)
+- Let's Encrypt (SSL Certificates)
+- Systemd (Service Management)
 
 ### **Tools**
 - IntelliJ IDEA
@@ -335,6 +367,50 @@ Frontend runs on: `http://localhost:5173`
 
 ---
 
+<a id="deployment"></a>
+# 🚀 Deployment
+
+**This application is deployed on AWS EC2 and accessible at:** [https://ems.gitsoft.uk](https://ems.gitsoft.uk)
+
+### **Deployment Architecture**
+
+```
+Internet → Route 53 (DNS) → EC2 Instance
+                              │
+                              ├─ Nginx (Port 443 - HTTPS)
+                              │   ├─ React Frontend (/var/www/ems)
+                              │   └─ API Proxy → Spring Boot (localhost:8081)
+                              │
+                              └─ MariaDB (Port 3306 - localhost only)
+```
+
+### **Key Features**
+- ✅ HTTPS with Let's Encrypt SSL certificate
+- ✅ Automatic HTTP to HTTPS redirect
+- ✅ Nginx reverse proxy for API requests
+- ✅ Systemd service for auto-restart
+- ✅ Database isolation and security
+- ✅ Static file caching (30-day expiry)
+- ✅ Production-optimized React build
+
+### **Deployment Guide**
+
+For detailed deployment instructions, see:
+- **[EMS Deployment Guide](deployment/EMS_DEPLOYMENT_GUIDE.md)** - Complete step-by-step tutorial
+- **[Multi-App Deployment Guide](deployment/MULTI_APP_DEPLOYMENT_GUIDE.md)** - Deploying multiple apps on same server
+
+**Topics covered:**
+- AWS Route 53 DNS configuration
+- MariaDB database setup
+- Spring Boot production configuration
+- React production build with Vite
+- Nginx reverse proxy setup
+- SSL certificate automation
+- Systemd service management
+- Troubleshooting common issues
+
+---
+
 <a id="future-enhancements"></a>
 # 🔮 Future Enhancements
 
@@ -348,7 +424,7 @@ Frontend runs on: `http://localhost:5173`
 - Email notifications
 - Audit logging
 - Docker containerization
-- Deploy to AWS/Azure
+- CI/CD pipeline with GitHub Actions
 
 ---
 

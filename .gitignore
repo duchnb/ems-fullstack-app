@@ -158,4 +158,5 @@ typings/
 dist
 dist-ssr
 
-# End of https://www.toptal.com/developers/gitignore/api/java,maven,node,intellij
+# End of https://www.toptal.com/developers/gitignore/api/java,maven,node,intellijbackend/src/main/resources/application-prod.properties
+frontend/.env.production
